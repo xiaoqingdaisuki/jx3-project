@@ -478,7 +478,7 @@ module.exports = function (webpackEnv) {
               test: cssRegex,
               exclude: cssModuleRegex,
               use: getStyleLoaders({
-                importLoaders: 1,
+                importLoaders: 2,
                 sourceMap: isEnvProduction
                   ? shouldUseSourceMap
                   : isEnvDevelopment,
@@ -494,7 +494,7 @@ module.exports = function (webpackEnv) {
             {
               test: cssModuleRegex,
               use: getStyleLoaders({
-                importLoaders: 1,
+                importLoaders: 2,
                 sourceMap: isEnvProduction
                   ? shouldUseSourceMap
                   : isEnvDevelopment,
@@ -547,9 +547,10 @@ module.exports = function (webpackEnv) {
               exclude: lessModuleRegex,
               use: getStyleLoaders(
                 {
-                  importLoaders: 1, // 值是1
-                  modules: true, // 增加这个可以通过模块方式来访问css
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  importLoaders: 1,
+                  sourceMap: isEnvProduction
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
                 },
                 "less-loader"
               ),
@@ -560,12 +561,20 @@ module.exports = function (webpackEnv) {
               use: getStyleLoaders(
                 {
                   importLoaders: 1,
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
-                  modules: true,
-                  getLocalIdent: getCSSModuleLocalIdent,
+                  sourceMap: isEnvProduction
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
+                  modules: {
+                    getLocalIdent: getCSSModuleLocalIdent,
+                  },
                 },
                 "less-loader"
               ),
+            },
+            // ts
+            {
+              test: /\.tsx?$/,
+              use: ["babel-loader", "ts-loader"],
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
