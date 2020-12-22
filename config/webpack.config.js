@@ -427,6 +427,7 @@ module.exports = function (webpackEnv) {
                       },
                     },
                   ],
+                  ["react-hot-loader/babel"],
                   isEnvDevelopment &&
                     shouldUseReactRefresh &&
                     require.resolve("react-refresh/babel"),

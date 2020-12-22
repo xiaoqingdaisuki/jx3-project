@@ -64,6 +64,7 @@
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.1",
     "react-dom": "^17.0.1",
+    "react-hot-loader": "^4.13.0",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.2.0",
     "resolve": "1.18.1",
@@ -168,6 +169,9 @@
           "libraryDirectory": "es",
           "style": "css"
         }
+      ],
+      [
+        "react-hot-loader/babel"
       ]
     ]
   },
