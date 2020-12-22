@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import moment from "moment";
 import "./assets/css/common.less";
@@ -8,12 +9,15 @@ import NoFound from "./components/NoFound.tsx";
 
 React.Component.prototype.$moment = moment;
 
-ReactDOM.render(
+const router = (
   <Router>
     <Switch>
       <Route exact path="/" component={Index} />
       <Route component={NoFound} />
     </Switch>
-  </Router>,
-  document.getElementById("root")
+  </Router>
 );
+
+ReactDOM.render(router, document.getElementById("root"));
+
+export default hot(module)(router);

@@ -198,6 +198,7 @@ module.exports = function (webpackEnv) {
             // We include the app code last so that if there is a runtime error during
             // initialization, it doesn't blow up the WebpackDevServer client, and
             // changing JS code would still trigger a refresh.
+            ["react-hot-loader/patch", "./src"],
           ]
         : paths.appIndexJs,
     output: {
@@ -427,6 +428,7 @@ module.exports = function (webpackEnv) {
                       },
                     },
                   ],
+                  // react-hot-loader
                   ["react-hot-loader/babel"],
                   isEnvDevelopment &&
                     shouldUseReactRefresh &&
@@ -774,6 +776,8 @@ module.exports = function (webpackEnv) {
           },
         },
       }),
+      // react-hot-loader
+      new ForkTsCheckerWebpackPlugin(),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
