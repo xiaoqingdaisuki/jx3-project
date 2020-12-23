@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/lodash": "^4.14.165",
     "@types/react": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
@@ -65,7 +66,6 @@
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.1",
     "react-dom": "^17.0.1",
-    "react-hot-loader": "^4.13.0",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.2.0",
     "resolve": "1.18.1",
@@ -170,9 +170,6 @@
           "libraryDirectory": "es",
           "style": "css"
         }
-      ],
-      [
-        "react-hot-loader/babel"
       ],
       [
         "dynamic-import-node",

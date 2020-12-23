@@ -198,7 +198,6 @@ module.exports = function (webpackEnv) {
             // We include the app code last so that if there is a runtime error during
             // initialization, it doesn't blow up the WebpackDevServer client, and
             // changing JS code would still trigger a refresh.
-            ["react-hot-loader/patch", "./src"],
           ]
         : paths.appIndexJs,
     output: {
@@ -428,8 +427,6 @@ module.exports = function (webpackEnv) {
                       },
                     },
                   ],
-                  // react-hot-loader
-                  ["react-hot-loader/babel"],
                   isEnvDevelopment &&
                     shouldUseReactRefresh &&
                     require.resolve("react-refresh/babel"),
@@ -578,6 +575,11 @@ module.exports = function (webpackEnv) {
             {
               test: /\.tsx?$/,
               use: ["babel-loader", "ts-loader"],
+            },
+            // 添加css文件进入打包 监听热更新
+            {
+              test: /\.(less|css)?$/,
+              use: ["style-loader", "css-loader", "less-loader"],
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
@@ -776,8 +778,6 @@ module.exports = function (webpackEnv) {
           },
         },
       }),
-      // react-hot-loader
-      new ForkTsCheckerWebpackPlugin(),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.

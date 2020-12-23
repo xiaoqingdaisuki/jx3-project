@@ -5,11 +5,7 @@ import { Layout } from "antd";
 const Footer: React.FC = () => {
   const { Footer } = Layout;
 
-  return (
-    <Footer>
-      <div className="footer">©2020 Created by xiaoqingdaisuki</div>
-    </Footer>
-  );
+  return <Footer>©2020 Created by xiaoqingdaisuki</Footer>;
 };
 
 export default Footer;

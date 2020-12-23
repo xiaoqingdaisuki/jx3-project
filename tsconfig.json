@@ -3,6 +3,7 @@
     "outDir": "./dist",
     "module": "esnext",
     "target": "esnext",
+    "types": ["lodash"],
     "lib": ["esnext", "dom"],
     "sourceMap": true,
     "baseUrl": ".",

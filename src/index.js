@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import moment from "moment";
 import "./assets/css/common.less";
@@ -19,5 +18,3 @@ const router = (
 );
 
 ReactDOM.render(router, document.getElementById("root"));
-
-export default hot(module)(router);
