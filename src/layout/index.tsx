@@ -6,17 +6,7 @@ import Content from "./Content";
 import RightSider from "./RightSider";
 import Footer from "./Footer";
 import throttle from "lodash/throttle";
-
-export type ToolListItem = {
-  id: number;
-  title: string;
-  status: boolean;
-  width?: number;
-  position?: {
-    x: number;
-    y: number;
-  };
-};
+import { ProcessListItem } from "../components/Process";
 
 const BasicLayout: React.FC = () => {
   const [leftSider, setLeftSider] = useState(true);
@@ -30,6 +20,8 @@ const BasicLayout: React.FC = () => {
         x: 50,
         y: 300,
       },
+      width: 300,
+      height: 200,
     },
     {
       id: 2,
@@ -39,14 +31,23 @@ const BasicLayout: React.FC = () => {
         x: 200,
         y: 200,
       },
+      width: 300,
+      height: 200,
     },
     {
       id: 3,
       title: "program3",
       status: true,
+      width: 300,
+      height: 200,
+      position: {
+        x: 0,
+        y: 0,
+      },
     },
   ];
-  const [toolList, setToolList] = useState<ToolListItem[]>(data);
+
+  const [processList, setProcessList] = useState<ProcessListItem[]>(data);
 
   const onResize = useCallback(() => {
     window.innerWidth < 1180 ? setRightSider(false) : setRightSider(true);
@@ -59,14 +60,14 @@ const BasicLayout: React.FC = () => {
     return () => {
       window.addEventListener("resize", throttle(onResize, 100));
     };
-  });
+  }, [onResize]);
 
   return (
     <Layout>
       <Header />
       <Layout>
         {leftSider === true && <LeftSider />}
-        <Content toolList={toolList} />
+        <Content processList={processList} />
         {rightSider === true && <RightSider />}
       </Layout>
       <Footer />
