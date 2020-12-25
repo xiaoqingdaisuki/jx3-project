@@ -65,3 +65,5 @@ components/**/*.jsx
 !components/**/__tests__/**/*.js.snap
 /.history
 *.tmp
+.eslintcache
+*.eslintcache
