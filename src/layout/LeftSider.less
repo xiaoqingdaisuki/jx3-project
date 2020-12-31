@@ -1,15 +1,33 @@
 .sider-left {
   padding: 15px;
   background: #f0f2f5;
-}
+  .tool-list {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    flex: 1;
 
-.tool-list {
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    &-item {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 
-.ant-layout-sider-children {
-  background: #fff;
+  .ant-layout-sider-children {
+    background: #fff;
+  }
+
+  .ant-btn {
+    width: 100%;
+    position: relative;
+  }
+  .ant-switch {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

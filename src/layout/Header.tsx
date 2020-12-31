@@ -17,6 +17,7 @@ const Header: React.FC = (props) => {
       <a
         className="icon-github"
         href="https://github.com/xiaoqingdaisuki"
+        rel="noreferrer"
         target="_blank"
         data-hotkey="g d"
         aria-label="goToGithub"

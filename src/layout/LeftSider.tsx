@@ -14,7 +14,12 @@ interface toolListItem {
 
 const LeftSider: React.FC<LeftSiderProps> = (props) => {
   const { Sider } = Layout;
-  const [toolList, setToolList] = useState<toolListItem[]>([]);
+  const data = [
+    { id: 1, name: "program1", check: false },
+    { id: 2, name: "program2", check: false },
+    { id: 3, name: "program3", check: false },
+  ];
+  const [toolList, setToolList] = useState<toolListItem[]>(data);
   const [btnDisabled, setBtnDisabled] = React.useState<boolean>(true);
 
   const toggle = (e: any): void => {
@@ -33,38 +38,30 @@ const LeftSider: React.FC<LeftSiderProps> = (props) => {
   };
 
   useEffect(() => {
-    const data = [
-      { id: 1, name: "program1", check: false },
-      { id: 2, name: "program2", check: false },
-      { id: 3, name: "program3", check: false },
-    ];
     setToolList(data);
   }, []);
 
   return (
     <Sider width={300} theme="light" className="sider-left">
       <div className="tool-list">
-        <Button type={!btnDisabled ? "primary" : undefined} onClick={toggle}>
-          aaa
-        </Button>
-        <Switch
-          onClick={toggle}
-          checkedChildren="开启"
-          unCheckedChildren="关闭"
-          checked={!btnDisabled}
-        />
         {toolList.map((item, index) => {
-          <div className="tool-list-item" key={index}>
-            <Switch
-              disabled={item.check}
-              onClick={toggle}
-              checkedChildren="开启"
-              unCheckedChildren="关闭"
-            />
-            <Button type="primary" disabled={item.check}>
-              {item.name}
-            </Button>
-          </div>;
+          return (
+            <div className="tool-list-item" key={item.id}>
+              <Button
+                type={!btnDisabled ? "primary" : undefined}
+                size="large"
+                onClick={toggle}
+              >
+                aaa
+              </Button>
+              <Switch
+                onClick={toggle}
+                checkedChildren="开启"
+                unCheckedChildren="关闭"
+                checked={!btnDisabled}
+              />
+            </div>
+          );
         })}
       </div>
     </Sider>
