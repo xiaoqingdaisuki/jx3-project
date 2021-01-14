@@ -44,7 +44,7 @@ const Process: React.FC<ProcessProps> = (props) => {
       position={prop.position}
     >
       <Card
-        className={prop.status === true ? "card" : "card hide"}
+        className={prop.status ? "card" : "card hide"}
         title={prop.title}
         extra={
           <div className="card-btn-group">

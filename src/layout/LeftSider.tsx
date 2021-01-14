@@ -1,67 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import "./LeftSider.less";
 import { Layout, Switch, Button } from "antd";
+import { ProcessListItem } from "../components/Process";
 
 interface LeftSiderProps {
+  data?: ProcessListItem[];
   children?: React.ReactNode | React.FC;
 }
 
-interface toolListItem {
-  id: number;
-  name: string;
-  check: boolean;
-}
+const ToolItem: React.FC<ProcessListItem> = (props) => {
+  const { title, status } = props;
+  const [btnDisabled, setBtnDisabled] = useState<boolean>(status);
+
+  const toggle = useCallback(() => {
+    setBtnDisabled(!btnDisabled);
+  }, [btnDisabled]);
+
+  return (
+    <div className="tool-list-item">
+      <Button
+        type={btnDisabled ? "primary" : undefined}
+        size="large"
+        onClick={toggle}
+      >
+        {title}
+      </Button>
+      <Switch
+        checkedChildren="开启"
+        unCheckedChildren="关闭"
+        checked={btnDisabled}
+        onClick={toggle}
+      />
+    </div>
+  );
+};
 
 const LeftSider: React.FC<LeftSiderProps> = (props) => {
+  const { data } = props;
   const { Sider } = Layout;
-  const data = [
-    { id: 1, name: "program1", check: false },
-    { id: 2, name: "program2", check: false },
-    { id: 3, name: "program3", check: false },
-  ];
-  const [toolList, setToolList] = useState<toolListItem[]>(data);
-  const [btnDisabled, setBtnDisabled] = React.useState<boolean>(true);
-
-  const toggle = (e: any): void => {
-    setBtnDisabled(!btnDisabled);
-    const l = toolList;
-    for (let i = 0; i < l.length; i++) {
-      if (e.id === l[i].id) {
-        l[i].check = !l[i].check;
-      }
-    }
-    setToolList(l);
-  };
-
-  const onChange = (checked: boolean) => {
-    console.log(checked);
-  };
-
-  useEffect(() => {
-    setToolList(data);
-  }, []);
 
   return (
     <Sider width={300} theme="light" className="sider-left">
       <div className="tool-list">
-        {toolList.map((item, index) => {
-          return (
-            <div className="tool-list-item" key={item.id}>
-              <Button
-                type={!btnDisabled ? "primary" : undefined}
-                size="large"
-                onClick={toggle}
-              >
-                aaa
-              </Button>
-              <Switch
-                onClick={toggle}
-                checkedChildren="开启"
-                unCheckedChildren="关闭"
-                checked={!btnDisabled}
-              />
-            </div>
-          );
+        {data?.map((item) => {
+          return <ToolItem {...item} key={item.id} />;
         })}
       </div>
     </Sider>

@@ -11,7 +11,7 @@ import { ProcessListItem } from "../components/Process";
 const BasicLayout: React.FC = () => {
   const [leftSider, setLeftSider] = useState(true);
   const [rightSider, setRightSider] = useState(true);
-  const data = [
+  const data: ProcessListItem[] = [
     {
       id: 1,
       title: "program1",
@@ -26,7 +26,7 @@ const BasicLayout: React.FC = () => {
     {
       id: 2,
       title: "program2",
-      status: true,
+      status: false,
       position: {
         x: 200,
         y: 200,
@@ -37,7 +37,7 @@ const BasicLayout: React.FC = () => {
     {
       id: 3,
       title: "program3",
-      status: true,
+      status: false,
       width: 300,
       height: 200,
       position: {
@@ -66,9 +66,9 @@ const BasicLayout: React.FC = () => {
     <Layout>
       <Header />
       <Layout>
-        {leftSider === true && <LeftSider />}
+        {leftSider && <LeftSider data={data} />}
         <Content processList={processList} />
-        {rightSider === true && <RightSider />}
+        {rightSider && <RightSider />}
       </Layout>
       <Footer />
     </Layout>
