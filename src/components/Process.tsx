@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Process.less";
 import { Card } from "antd";
 import Drag from "./Drag";
 
-interface ProcessProps {
-  prop: ProcessListItem;
+interface ProcessProps extends ProcessListItem {
+  setData?: Function;
 }
 
 export type ProcessListItem = {
   id: number;
-  title: string;
+  title?: string;
   status: boolean;
   windowWidth?: number;
   windowHeight?: number;
@@ -19,10 +19,11 @@ export type ProcessListItem = {
     x: number;
     y: number;
   };
+  setData?: Function;
 };
 
 const Process: React.FC<ProcessProps> = (props) => {
-  const { prop } = props;
+  const { setData, ...prop } = props;
   const [limit, setLimit] = useState({});
 
   useEffect(() => {
@@ -35,16 +36,10 @@ const Process: React.FC<ProcessProps> = (props) => {
   }, [prop.windowWidth, prop.windowHeight, prop.width, prop.height]);
 
   return (
-    <Drag
-      id={prop.id}
-      key={prop.id}
-      limit={limit}
-      width={prop.width}
-      height={prop.height}
-      position={prop.position}
-    >
+    <Drag {...prop} limit={limit} setData={setData}>
       <Card
         className={prop.status ? "card" : "card hide"}
+        size="small"
         title={prop.title}
         extra={
           <div className="card-btn-group">

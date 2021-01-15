@@ -5,16 +5,10 @@ import React, {
   useEffect,
   CSSProperties,
 } from "react";
+import { ProcessListItem } from "./Process";
 
-interface dragProps {
-  id: number;
-  children: any;
-  width?: number;
-  height?: number;
-  position: {
-    x: number;
-    y: number;
-  };
+interface dragProps extends ProcessListItem {
+  children: React.ReactNode | HTMLElement | JSX.Element;
   limit: {
     x?: number;
     y?: number;
@@ -22,7 +16,7 @@ interface dragProps {
 }
 
 const Drag = (props: dragProps) => {
-  const { children, id, limit, width, height, position } = props;
+  const { children, id, limit, width, height, position, setData } = props;
   const [state, setState] = useState({
     isDragging: false,
     origin: { x: 0, y: 0 },

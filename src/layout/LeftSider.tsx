@@ -6,15 +6,21 @@ import { ProcessListItem } from "../components/Process";
 interface LeftSiderProps {
   data?: ProcessListItem[];
   children?: React.ReactNode | React.FC;
+  setData?: Function;
 }
 
 const ToolItem: React.FC<ProcessListItem> = (props) => {
-  const { title, status } = props;
+  const { id, title, status, setData } = props;
   const [btnDisabled, setBtnDisabled] = useState<boolean>(status);
 
   const toggle = useCallback(() => {
     setBtnDisabled(!btnDisabled);
-  }, [btnDisabled]);
+    const params = {
+      id: id,
+      status: !btnDisabled,
+    };
+    setData!(params);
+  }, [id, btnDisabled]);
 
   return (
     <div className="tool-list-item">
@@ -36,14 +42,14 @@ const ToolItem: React.FC<ProcessListItem> = (props) => {
 };
 
 const LeftSider: React.FC<LeftSiderProps> = (props) => {
-  const { data } = props;
+  const { data, setData } = props;
   const { Sider } = Layout;
 
   return (
     <Sider width={300} theme="light" className="sider-left">
       <div className="tool-list">
         {data?.map((item) => {
-          return <ToolItem {...item} key={item.id} />;
+          return <ToolItem {...item} key={item.id} setData={setData} />;
         })}
       </div>
     </Sider>

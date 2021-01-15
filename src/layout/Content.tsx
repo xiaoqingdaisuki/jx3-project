@@ -6,10 +6,11 @@ import Process from "../components/Process";
 
 interface ContentProps {
   processList?: ProcessListItem[];
+  setData?: Function;
 }
 
 const Content: React.FC<ContentProps> = (props) => {
-  const { processList } = props;
+  const { processList, setData } = props;
   const { Content } = Layout;
   const [updatelist, setUpdateList] = useState<ProcessListItem[]>([]);
 
@@ -31,8 +32,8 @@ const Content: React.FC<ContentProps> = (props) => {
   return (
     <Content>
       <div className="main" ref={windowRef}>
-        {updatelist?.map((item, index) => {
-          return <Process prop={item} key={index} />;
+        {updatelist?.map((item) => {
+          return <Process {...item} key={item.id} setData={setData} />;
         })}
       </div>
     </Content>

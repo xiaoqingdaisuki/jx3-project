@@ -8,3 +8,50 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.ant-card-extra {
+  position: relative;
+}
+
+.card-btn-group {
+  width: 100%;
+  background-color: red;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card-btn-max {
+  position: relative;
+  background-color: green;
+  width: 18px;
+  height: 18px;
+  float: right;
+  border-radius: 50%;
+}
+.card-btn-close {
+  position: relative;
+  background-color: red;
+  width: 18px;
+  height: 18px;
+  float: right;
+  border-radius: 50%;
+}
+.card-btn-max::after {
+  position: relative;
+  background-color: red;
+  width: 18px;
+  height: 18px;
+  float: right;
+  border-radius: 50%;
+}
+
+.card-btn-close::after {
+  content: "×";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}

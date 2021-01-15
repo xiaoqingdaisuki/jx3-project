@@ -49,6 +49,20 @@ const BasicLayout: React.FC = () => {
 
   const [processList, setProcessList] = useState<ProcessListItem[]>(data);
 
+  const setProcessData = useCallback((params: ProcessListItem): void => {
+    const list = [...data];
+    if (params.id) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].id === params.id) {
+          const obj = Object.assign(list[i], params);
+          list[i] = obj;
+        }
+      }
+      console.log(list);
+      setProcessList(list);
+    }
+  }, []);
+
   const onResize = useCallback(() => {
     window.innerWidth < 1180 ? setRightSider(false) : setRightSider(true);
     window.innerWidth < 768 ? setLeftSider(false) : setLeftSider(true);
@@ -66,8 +80,8 @@ const BasicLayout: React.FC = () => {
     <Layout>
       <Header />
       <Layout>
-        {leftSider && <LeftSider data={data} />}
-        <Content processList={processList} />
+        {leftSider && <LeftSider data={data} setData={setProcessData} />}
+        <Content processList={processList} setData={setProcessData} />
         {rightSider && <RightSider />}
       </Layout>
       <Footer />
